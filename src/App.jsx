@@ -1,33 +1,40 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import List from './List'
+import Alert from './Alert'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [name, setName] = useState('')
+  const [list, setList] = useState([])
+  const [isEditing, setIsEditing] = useState(false)
+  const [editId, setEditId] = useState(null)
+  const [alert, setAlert] = useState({show:false, msg:'', type:''})
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+  }
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+   <section className='section-center'>
+    <form className='grocery-form' onSubmit={handleSubmit}>
+      {alert.show && <Alert/>}
+      <h3>grocery buddy</h3>
+      <div className="form-control">
+        <input type="text" className='grocery' 
+        placeholder='eggs' value={name} onChange={(e) => setName(e.target.value)} />
+        <button className='submit-btn' type='submit'>
+          {isEditing? 'edit' : 'submit'}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    </form>
+    <div className="grocery-container">
+      <List/>
+      <button className="clear-btn">
+        clear items
+      </button>
     </div>
+   </section>
   )
 }
 
