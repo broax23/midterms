@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
 import List from './List'
 import Alert from './Alert'
 
